@@ -91,7 +91,7 @@ export default function Book() {
         <>
           { book && 
           <>
-            <div className="flex flex-col lg:flex-row p-4 w-full mt-10">
+            <div className="flex flex-col lg:flex-row p-4 w-full mt-10 overflow-x-hidden">
                 <div className="lg:w-1/3 w-full mb-4 lg:mb-0">
                 <Slider {...settings}>
                     {book.covers?.filter(coverId => coverId !== -1).map((coverId, index) => (
@@ -111,8 +111,8 @@ export default function Book() {
                 <h1 className="text-2xl font-bold mb-4 text-gray-800 mt-1">
                 {book.title || 'Untitled'}
                 </h1>
-                <div className='h-[1px] bg-gray-400 w-[600px]'></div>
-                <p className="text-gray-700 w-[600px] mt-5">
+                <div className='h-[1px] bg-gray-400 w-[350px] md:w-[600px]'></div>
+                <p className="text-gray-700 w-[350px] justify-center text-center flex flex-col md:w-[600px] mt-5">
                 {book.description?.value || book.description || 'No description available'}
                 </p>
             </div>

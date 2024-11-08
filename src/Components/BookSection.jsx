@@ -8,6 +8,7 @@ const BookSection = memo(({ books }) => {
         e.preventDefault()
         navigate(`/book${book_key}?&author=${author_name}`);
     }
+    console.log(books)
 
     const Purchase_Book = (e,amazon_id)=>{
         e.preventDefault()
@@ -33,10 +34,11 @@ const BookSection = memo(({ books }) => {
                     <div className="flex-1">
                         <h3 className="text-xl font-semibold text-gray-800 mb-2">{book.title}</h3>
                         <p className="text-sm text-gray-600 mb-2 font-bold">{book.author_name ? book.author_name.join(', ') : 'Unknown Author'}</p>
-                        <p className="text-sm text-gray-500">Reviews: {book.ratings_count}</p>
-                        <p className="text-sm text-gray-500">Rating: {book.ratings_sortable?.toFixed(2)} &#9733;</p>
+                        <p className="text-sm text-gray-500">Reviews: {book.ratings_count? book.ratings_count : 'none'}</p>
+                        <p className="text-sm text-gray-500">Read by: {book.already_read_count? book.already_read_count : '0'}</p>
+                        <p className="text-sm text-gray-500">Rating: {book.ratings_sortable? <>{`${book.ratings_sortable?.toFixed(2)}`}&#9733;</> : 'none'}</p>
                         <div className='flex'>
-                            <p className="text-sm text-gray-500">{book.first_publish_year ? `Published on: ${book.first_publish_year}` : 'Year Unknown'}</p>
+                            <p className="text-sm text-gray-500 mr-1">{book.first_publish_year ? `Published on: ${book.first_publish_year}` : 'Year Unknown'}</p>
                             <p className='ml-auto border p-2 rounded-xl border-black hover:border-green-400 cursor-pointer hover:text-green-400'
                                 onClick={(e)=>Purchase_Book(e,book.id_amazon[0])}
                             >

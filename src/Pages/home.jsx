@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import TextTransition, { presets } from 'react-text-transition';
 import BookSection from '../Components/BookSection';
 import { TopSection } from '../Components/TopSection';
 import Button from '../Components/Button'
@@ -8,14 +7,12 @@ import Loader from '../Components/Loader';
 import NoBooks from '../Components/NoBooks';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router';
 import { FavoriteContext } from '../ContextProvider'
 
 export default function Home() {
     const sectionRef = useRef()
     const [page, setPage] = useState(1)
     const [Loading,setLoading] = useState(false)
-    const navigate = useNavigate()
 
 
     const placeHolder = () => {
@@ -31,7 +28,7 @@ export default function Home() {
 
     const [search, setSearch] = useState('')
     const [searchFor, setSearchFor] = useState('title')
-    const searchTag = ['Book Name', 'Author', 'Genre', 'ISBN', 'Person']
+    const searchTag = ['Author','Title', 'Genre', 'ISBN', 'Person']
 
     const set_search_type = () => {
         switch (searchFor) {
@@ -56,14 +53,18 @@ export default function Home() {
         setLoading(true)
         const type = set_search_type() || 'title'
         try {
-            const result = await axios.get(`https://openlibrary.org/search.json?${type}=${search || 'all'}&limit=100&page=${page}`)
+            const result = await axios.get(`https://openlibrary.org/search.json?${type}=${search || 'all'}&limit=10&page=${page}`)
+            console.log(result)
             if (result.status === 200) {
                 setBookResults(result.data)
                 setLoading(false)
             } else {
+                setLoading(false)
+                toast("OPPS!!, Server Connection");
                 console.error('Error in fetching books')
             }
         } catch (err) {
+            setLoading(false)
             toast("OPPS!!, Error in Connecting. Please try again after some time");
             console.error("Error fetching Books")
         }
@@ -88,8 +89,8 @@ export default function Home() {
     }
 
     return (
-        <div>
-            <div className="flex flex-col items-center justify-center min-h-screen px-4">
+        <div className="overflow-x-hidden">
+            <div className="flex flex-col items-center justify-center min-h-screen px-4 w-auto">
                 <ToastContainer />
                 <TopSection />
                 <div className='w-full max-w-md flex md:flex-row items-center gap-2 my-2'>
@@ -111,6 +112,7 @@ export default function Home() {
                         placeholder={`${placeHolder()}`}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
+                        onKeyDown={(e)=>e.key === 'Enter'? SearchBook() : ''}
                     />
                     <Button
                         onClick={SearchBook}

@@ -13,9 +13,12 @@ export function TopSection() {
     }, [])
 
     return (
-        <h2 className="text-[80px] h-40 flex text-gray-800 mb-4" style={{fontFamily: 'fantasy'}}>Search for 
-            <TextTransition springConfig={presets.wobbly} className='w-40 ml-8'>
-                <p className='text-[80px] font-bold text-gray-400'>{TEXTS[index % TEXTS.length]}</p>
+        <h2 className="text-[30px] md:text-[80px] text-center h-40 flex text-gray-800 mb-4" style={{fontFamily: 'fantasy'}}>
+            Search for 
+            <TextTransition springConfig={presets.wobbly} className='w-40 ml-4 md:ml-8'>
+                <p className='text-[30px] md:text-[80px] font-bold text-gray-400'>
+                    {TEXTS[index % TEXTS.length]}
+                </p>
             </TextTransition>
         </h2>
     )
