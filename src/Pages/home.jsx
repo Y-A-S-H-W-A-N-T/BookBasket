@@ -14,7 +14,7 @@ export default function Home() {
     const [page, setPage] = useState(1)
     const [Loading,setLoading] = useState(false)
 
-
+    // to set the placeholder according to the search type
     const placeHolder = () => {
         switch (searchFor) {
             case 'Book Name': return 'eg: Harry Potter'
@@ -30,6 +30,7 @@ export default function Home() {
     const [searchFor, setSearchFor] = useState('title')
     const searchTag = ['Author','Title', 'Genre', 'ISBN', 'Person']
 
+    // setting the search type
     const set_search_type = () => {
         switch (searchFor) {
             case 'Book Name': return 'title'
@@ -41,35 +42,43 @@ export default function Home() {
         }
     }
 
+    // useContext api, for maintaining the state, prevent resetting of data from page reload
     const { BookResults, setBookResults } = useContext(FavoriteContext)
 
     useEffect(() => {
+        // scrolling the screen to the book results after fetching
         if (BookResults) {
             sectionRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [BookResults]);
 
+    // fetching books according to the search
     const SearchBook = async () => {
         setLoading(true)
         const type = set_search_type() || 'title'
         try {
+            //pagination
+            // fetching by using page number | type | search
             const result = await axios.get(`https://openlibrary.org/search.json?${type}=${search || 'all'}&limit=10&page=${page}`)
             console.log(result)
             if (result.status === 200) {
-                setBookResults(result.data)
+                // storing book results in context api to prevent emptying of the state after navigating back here
+                setBookResults(result.data) // storing book results
                 setLoading(false)
             } else {
                 setLoading(false)
-                toast("OPPS!!, Server Connection");
+                toast("OPPS!!, Server Connection"); // firing error
                 console.error('Error in fetching books')
             }
         } catch (err) {
             setLoading(false)
-            toast("OPPS!!, Error in Connecting. Please try again after some time");
+            toast("OPPS!!, Error in Connecting. Please try again after some time"); // firing error
             console.error("Error fetching Books")
         }
     }
 
+    // pagination
+    // fetching books after page change
     useEffect(() => {
         if(search){
             setLoading(true)
@@ -80,6 +89,8 @@ export default function Home() {
     const handleSearchFor = (val)=>{
         setSearchFor(val)
     }
+
+    // handling page change
 
     const handleNextPage = () => {
         setPage((prevPage) => prevPage + 1);
@@ -92,7 +103,9 @@ export default function Home() {
         <div className="overflow-x-hidden">
             <div className="flex flex-col items-center justify-center min-h-screen px-4 w-auto">
                 <ToastContainer />
+                {/* Text animation section */}
                 <TopSection />
+                {/* Suggestion search types */}
                 <div className='w-full max-w-md flex md:flex-row items-center gap-2 my-2'>
                     {searchTag.map((val, ind) => (
                         <p key={ind} className='p-2 border rounded-[50px] cursor-pointer'
@@ -123,6 +136,8 @@ export default function Home() {
                     </Button>
                 </div>
             </div>
+            {/* Displaying search result (fetched books) */}
+            {/* Displaying not books found when search result is empty */}
             <div ref={sectionRef} className='mx-10'>
                 {
                     BookResults?.numFound === 0 || BookResults?.docs.length === 0 ?
@@ -131,7 +146,7 @@ export default function Home() {
                     <BookSection books={BookResults} />
                 }
             </div>
-
+            {/* Pagination */}
             {
                 BookResults?.numFound > 100 &&
                 <div className="flex justify-center items-center my-4">

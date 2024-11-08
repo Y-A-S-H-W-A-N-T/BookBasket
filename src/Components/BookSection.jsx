@@ -4,18 +4,22 @@ import { useNavigate } from 'react-router';
 const BookSection = memo(({ books }) => {
     const navigate = useNavigate()
 
+    // opening a particular book in a new page
     const View_Book = (e,book_key,author_name)=>{
         e.preventDefault()
         navigate(`/book${book_key}?&author=${author_name}`);
     }
     console.log(books)
 
+    // Directing user to amazon page to buy the clicked product
     const Purchase_Book = (e,amazon_id)=>{
         e.preventDefault()
         e.stopPropagation()
-        window.open(`https://www.amazon.com/dp/${amazon_id}`, "_blank");
+        window.open(`https://www.amazon.com/dp/${amazon_id}`, "_blank"); // navigating to amazon with amazon id
     }
 
+    // Books card section
+    // Contains details about books
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {books && books.docs.map((book, ind) => (

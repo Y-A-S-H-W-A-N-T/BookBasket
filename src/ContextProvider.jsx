@@ -4,6 +4,7 @@ export const FavoriteContext = createContext();
 
 export const ContextProvider = ({ children })=>{
 
+    // Books state to store and display fetched books from api
     const [BookResults, setBookResults] = useState()
 
     return (

@@ -45,10 +45,12 @@ export default function Book() {
     slidesToScroll: 1
   };
 
+  // displaying selected component to ui (Tags|Characters|Places)
   const ShowChoice = ()=>{
     if(choice === 'Tags'){
         return (
             <div className="flex flex-wrap p-4 gap-2">
+            {/* linking each key words/ data to wikipedia links */}
             {book.subjects?.map((tag, ind) => (
               <Link to={`https://en.wikipedia.org/wiki/${tag}`} target='_blank' key={ind} className="border p-2 rounded-2xl border-gray-400">
                 {tag}
@@ -60,6 +62,7 @@ export default function Book() {
     if(choice === 'Characters'){
         return (
             <div className="flex flex-wrap p-4 gap-2">
+            {/* linking each key words/ data to wikipedia links */}
             {book.subject_people?.map((tag, ind) => (
               <Link to={`https://en.wikipedia.org/wiki/${tag}`} target='_blank' key={ind} className="border p-2 rounded-2xl border-gray-400">
                 {tag}
@@ -71,6 +74,7 @@ export default function Book() {
     if(choice === 'Places'){
         return (
             <div className="flex flex-wrap p-4 gap-2">
+            {/* linking each key words/ data to wikipedia links */}
             {book.subject_places?.map((tag, ind) => (
               <Link to={`https://en.wikipedia.org/wiki/${tag}`} target='_blank' key={ind} className="border p-2 rounded-2xl border-gray-400">
                 {tag}
@@ -85,14 +89,17 @@ export default function Book() {
     <>
       {Loading?
         <div className='m-20'>
+          {/* Skeleton loader */}
           <Skeleton/>
         </div>
         :
         <>
           { book && 
           <>
+            {/* Displaying Individual Book Detail */}
             <div className="flex flex-col lg:flex-row p-4 w-full mt-10 overflow-x-hidden">
                 <div className="lg:w-1/3 w-full mb-4 lg:mb-0">
+                {/* Image slider */}
                 <Slider {...settings}>
                     {book.covers?.filter(coverId => coverId !== -1).map((coverId, index) => (
                         <div key={index}>
