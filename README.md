@@ -21,7 +21,7 @@ A web application for searching, viewing and getting a better understanding of b
 Web application made using React, and public API to fetch book details. Users can search for their desired books by using book title, author, genre, person and isbn number. Look for a certain book, gather details about it, navigate through all provided links to have a better understanding on the book. A Purchase link is available, which will navigate you to an Amazon link where you can buy that particular book. Brief details of the books are provided including keywords, click on it to read the article about it. React state management tool is used to prevent the website from fetching the books from the server frequently. It also boosts the user experience as user does not have to re-search his book. Responsive and eye pleasing designs for all types of screen
   ****
 ## Deployment
-- **Hosted Link**: [BookBasket](https://)
+- **Hosted Link**: [BookBasket](https://book-basket-one.vercel.app/)
  ****
 
 ## Features

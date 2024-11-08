@@ -28,7 +28,7 @@ export default function Home() {
 
     const [search, setSearch] = useState('')
     const [searchFor, setSearchFor] = useState('title')
-    const searchTag = ['Author','Title', 'Genre', 'ISBN', 'Person']
+    const searchTag = ['Author','Title', 'Person', 'ISBN', 'Genre']
 
     // setting the search type
     const set_search_type = () => {
