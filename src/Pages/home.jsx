@@ -19,7 +19,7 @@ export default function Home() {
         switch (searchFor) {
             case 'Book Name': return 'eg: Harry Potter'
             case 'Author': return 'eg: J K Rowling'
-            case 'Genre': return 'eg: Adventure'
+            case 'Genre': return 'eg: Horror'
             case 'ISBN': return 'eg: 0613942892'
             case 'Person': return 'eg: Hermione'
             default: return 'search for a book'
