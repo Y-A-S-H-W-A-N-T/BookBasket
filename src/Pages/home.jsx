@@ -67,7 +67,7 @@ export default function Home() {
                 setLoading(false)
             } else {
                 setLoading(false)
-                toast("OPPS!!, Server Connection"); // firing error
+                toast("OPPS!!, Facing an issue with the Server"); // firing error
                 console.error('Error in fetching books')
             }
         } catch (err) {

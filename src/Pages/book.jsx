@@ -26,7 +26,7 @@ export default function Book() {
         setBook(result.data);
         setLoading(false)
       } else {
-        console.error('Error in fetching book details');
+        console.error('Error while fetching book details');
       }
     } catch (err) {
       console.error("Error while fetching book details");
