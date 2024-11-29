@@ -59,7 +59,7 @@ export default function Home() {
         try {
             //pagination
             // fetching by using page number | type | search
-            const result = await axios.get(`https://openlibrary.org/search.json?${type}=${search || 'all'}&limit=20&page=${page}`)
+            const result = await axios.get(`https://openlibrary.org/search.json?${type}=${search || 'all'}&limit=10&page=${page}`)
             console.log(result)
             if (result.status === 200) {
                 // storing book results in context api to prevent emptying of the state after navigating back here
